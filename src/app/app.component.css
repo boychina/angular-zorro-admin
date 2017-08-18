@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-style: normal;
+}
+header{
+    text-align: center;
+    height: 54px;
+    line-height: 54px;
+}
