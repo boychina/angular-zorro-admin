@@ -4,16 +4,16 @@ import { Component, OnInit } from '@angular/core';
     selector: 'nz-demo-button-type',
     template: `
         <button nz-button [nzType]="'primary'">
-            <span>Primary</span>
+            <span>刷新</span>
         </button>
         <button nz-button [nzType]="'default'">
-            <span>Default</span>
+            <span>搜索</span>
         </button>
         <button nz-button [nzType]="'dashed'">
-            <span>Dashed</span>
+            <span>新增</span>
         </button>
         <button nz-button [nzType]="'danger'">
-            <span>Danger</span>
+            <span>删除</span>
         </button>`,
     styles: []
 })
