@@ -5,7 +5,7 @@ import { AuthGuard } from './Shared';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: './Login/login.module#LoginModule',
+        loadChildren: './Layout/layout.module#LayoutModule',
         canActivate: [AuthGuard]
     },
     { 
