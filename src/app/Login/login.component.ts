@@ -1,29 +1,25 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
+import { routerTransition } from '../router.animations';
 
 @Component({
-    selector: 'login',
-    styleUrls: [
-        './login.scss'
-    ],
-    templateUrl: './login.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    animations: [routerTransition()]
 })
 
-export class LoginComponent {
-    model: any;
-    error: any;
+export class LoginComponent implements OnInit {
 
-    constructor(private router: Router, private loginService: LoginService) {
-        this.model = {};
+    constructor(public router: Router) {
+        
     }
 
-    onSubmit(loginForm) {
-        this.loginService.login(loginForm.value)
-            .subscribe(
-                user => this.router.navigateByUrl('/manage/home'),
-                error => this.error = error
-            )
-    };
+    ngOnInit() {
+
+    }
+
+    onLoggedin() {
+        localStorage.setItem('isLoggedin', 'true');
+    }
 }
