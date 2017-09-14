@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './Shared';
 
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
@@ -23,6 +25,7 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        NgZorroAntdModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
