@@ -7,10 +7,6 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            {
-                path: 'home',
-                loadChildren: './home/home.module#HomeModule'
-            },
             // {
             //     path: 'dashboard',
             //     loadChildren: './dashboard/dashboard.module#DashboardModule'
