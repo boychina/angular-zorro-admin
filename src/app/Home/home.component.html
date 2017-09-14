@@ -2,11 +2,29 @@
     <nz-layout class="layout">
       <nz-header>
         <div class="logo"></div>
-        <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-          <li nz-menu-item>nav 1</li>
-          <li nz-menu-item>nav 2</li>
-          <li nz-menu-item>nav 3</li>
-        </ul>
+        <nz-tabset class="tabs" [nzType]="'card'">
+            <nz-tab *ngFor="let tab of tabs">
+                <ng-template #nzTabHeading>
+                    <div class="tab-item">
+                        {{tab.name}}
+                        <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
+                    </div>
+                </ng-template>
+                <div>
+                    <nz-layout style="padding:0 24px 24px">
+                        <nz-breadcrumb style="margin:12px 0; line-height: 12px">
+                            <nz-breadcrumb-item>Home</nz-breadcrumb-item>
+                            <nz-breadcrumb-item>List</nz-breadcrumb-item>
+                            <nz-breadcrumb-item>App</nz-breadcrumb-item>
+                        </nz-breadcrumb>
+                        <nz-content class='content' style="background:#fff; padding: 24px;">Content {{tab.name}}</nz-content>
+                    </nz-layout>
+                </div>
+            </nz-tab>
+            <ng-template #nzTabBarExtraContent>
+                <i class="ant-tabs-new-tab anticon anticon-plus" (click)="newTab()"></i>
+            </ng-template>
+        </nz-tabset>
       </nz-header>
       <nz-layout>
         <nz-sider [nzWidth]="200" style="background:#fff">
@@ -40,14 +58,7 @@
             </li>
           </ul>
         </nz-sider>
-        <nz-layout style="padding:0 24px 24px">
-          <nz-breadcrumb style="margin:12px 0;">
-            <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-            <nz-breadcrumb-item>List</nz-breadcrumb-item>
-            <nz-breadcrumb-item>App</nz-breadcrumb-item>
-          </nz-breadcrumb>
-          <nz-content class='content' style="background:#fff; padding: 24px;">Content</nz-content>
-        </nz-layout>
+        
       </nz-layout>
     </nz-layout>
 </div>

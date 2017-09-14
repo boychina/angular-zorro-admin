@@ -1,16 +1,54 @@
-.home{
+:host ::ng-deep  .home {
     margin: 0;
     padding: 0;
     list-style: none;
-    .content{
+    .logo {
+        width: 64px;
+        height: 64px;
+        background-image: url("../../assets/images/logo.png");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        float: left;
+        border-radius: 5px;
+        margin-right: 86px;
+    }
+    .ant-tabs-bar {
+        border: 0 !important;
+        margin: 0;
+    }
+    .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-nav-container {
+        height: 64px;
+    }
+    .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+        border-radius: 0;
+        background-color: #404040;
+        border: 0;
+        color: #fff;
+    }
+    .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active{
+        color: #108ee9;
+    }
+    .ant-layout-header {
+        padding-right: 0;
+    }
+    .ant-tabs-nav{
+        height: 64px;
+    }
+    .tabs {
+        .tab-item {
+            line-height: 54px;
+        }
+        .ant-tabs-extra-content {
+            line-height: 64px;
+        }
+        .ant-tabs-nav-container {
+            margin-bottom: 0;
+        }
+    }
+    .content {
         height: calc( 100Vh - 130px );
     }
-}
-:host ::ng-deep .logo {
-    width: 120px;
-    height: 31px;
-    background: #333;
-    border-radius: 6px;
-    margin: 16px 28px 16px 0;
-    float: left;
+    .ant-breadcrumb {
+        height: 18px;
+    }
 }
