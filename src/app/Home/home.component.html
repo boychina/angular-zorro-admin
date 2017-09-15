@@ -10,7 +10,7 @@
                         <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
                     </div>
                 </ng-template>
-                <div>
+                <div class="home_container">
                     <nz-layout style="padding:0 24px 24px">
                         <nz-breadcrumb style="margin:12px 0; line-height: 12px">
                             <nz-breadcrumb-item>Home</nz-breadcrumb-item>
@@ -28,21 +28,40 @@
       </nz-header>
       <nz-layout>
         <nz-sider [nzWidth]="200" style="background:#fff">
-          <ul nz-menu [nzMode]="'inline'" style="height:100%">
-            <li nz-submenu *ngFor="let menuItem of menus">
-              <span title><i class="anticon anticon-user"></i>{{menuItem.name}}</span>
-              <ul *ngIf="menuItem.children">
-                <li nz-submenu *ngFor="let childItem of menuItem.children">
-                    <span title>{{childItem.name}}</span>
-                    <ul *ngIf="childItem.children">
-                        <li nz-menu-item *ngFor="let item of childItem.children">
-                            <span title>{{item.name}}</span>
+            <!-- <ul nz-menu [nzMode]="'inline'" style="height:100%">
+                <li nz-submenu *ngFor="let menuItem of menus" *ngIf="menuItem.children">
+                    <span title><i class="anticon anticon-user"></i>{{menuItem.name}}</span>
+                    <ul *ngIf="menuItem.children">
+                        <li nz-submenu *ngFor="let childItem of menuItem.children">
+                            <span title>{{childItem.name}}</span>
+                            <ul *ngIf="childItem.children">
+                                <li nz-menu-item *ngFor="let item of childItem.children">
+                                    <span title>{{item.name}}</span>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
-              </ul>
-            </li>
-          </ul>
+            </ul> -->
+            <div *ngFor="let menuItem of menus">
+                <div class="level0" *ngIf="menuItem.children && menuItem.children.length >= 1">
+                    <span>{{menuItem.name}}</span>
+                    <div *ngFor="let childItem of menuItem.children">
+                        <div class="level1" *ngIf="childItem.children && childItem.children.length >= 1">
+                            <span>{{childItem.name}}</span>
+                            <div class="level2" *ngFor="let item of childItem.children">
+                                <span>{{item.name}}</span>
+                            </div>
+                        </div>
+                        <span *ngIf="!childItem.children || childItem.children.length < 1">
+                            {{childItem.name}}
+                        </span>
+                    </div>
+                </div>
+                <span *ngIf="!menuItem.children || menuItem.children.length < 1">
+                    {{menuItem.name}}
+                </span>
+            </div>
         </nz-sider>
         
       </nz-layout>
