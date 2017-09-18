@@ -55,6 +55,8 @@
     .menus_content {
         position: relative;
         padding-left: 4px;
+        height: calc( 100Vh - 64px );
+        overflow-y: auto;
         .anticon {
             position: absolute;
             right: 16px;
@@ -84,4 +86,11 @@
     .menu_world.cursor {
         cursor: pointer;
     }
+    .level0 {
+        min-height: 42px;
+    }
+    /*.level0>span{
+        display: inline-block;
+        line-height: 42px;
+    }*/
 }

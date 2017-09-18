@@ -43,40 +43,40 @@
                     </ul>
                 </li>
             </ul> -->
-            <div *ngFor="let menuItem of menus">
+            <div *ngFor="let menuItem of menus" class="level0">
                 <div *ngIf="menuItem.children && menuItem.children.length >= 1">
                     <span (click)="menuItem._level = !menuItem._level" class="down_arrow">
                         <span class="item0"></span>
-                        <span class="menu_world cursor">{{menuItem.name}}</span>
+                        <span class="menu_world cursor" [title]="menuItem.name">{{menuItem.name}}</span>
                         <i *ngIf="!menuItem._level" class="anticon anticon-down"></i>
                         <i *ngIf="menuItem._level" class="anticon anticon-up"></i>
                     </span>
                     <div *ngIf="menuItem._level">
-                        <div *ngFor="let childItem of menuItem.children">
+                        <div *ngFor="let childItem of menuItem.children" class="level0">
                             <div *ngIf="childItem.children && childItem.children.length >= 1">
                                 <span class="item1"></span>
                                 <span (click)="childItem._level = !childItem._level">
-                                    <span class="menu_world cursor">{{childItem.name}}</span>
+                                    <span class="menu_world cursor" [title]="childItem.name">{{childItem.name}}</span>
                                     <i *ngIf="!childItem._level" class="anticon anticon-down"></i>
                                     <i *ngIf="childItem._level" class="anticon anticon-up"></i>
                                 </span>
                                 <div *ngIf="childItem._level">
-                                    <div *ngFor="let item of childItem.children">
+                                    <div *ngFor="let item of childItem.children" class="level0">
                                         <span class="item2"></span>
-                                        <span class="menu_world">{{item.name}}</span>
+                                        <span class="menu_world" [title]="item.name">{{item.name}}</span>
                                     </div>
                                 </div>
                             </div>
                             <span *ngIf="!childItem.children || childItem.children.length < 1">
                                 <span class="item1"></span>
-                                <span class="menu_world">{{childItem.name}}</span>
+                                <span class="menu_world" [title]="childItem.name">{{childItem.name}}</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <span *ngIf="!menuItem.children || menuItem.children.length < 1" (click)="onClick(menuItem.name)">
                     <span class="item0"></span>
-                    <span class="menu_world">{{menuItem.name}}</span>
+                    <span class="menu_world" [title]="menuItem.name">{{menuItem.name}}</span>
                 </span>
             </div>
         </nz-sider>
