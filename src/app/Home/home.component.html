@@ -45,7 +45,7 @@
             </ul> -->
             <div *ngFor="let menuItem of menus">
                 <div class="level0" *ngIf="menuItem.children && menuItem.children.length >= 1">
-                    <span>{{menuItem.name}}</span>
+                    <span (click)="onClick(menuItem.name)">{{menuItem.name}}</span>
                     <div *ngFor="let childItem of menuItem.children">
                         <div class="level1" *ngIf="childItem.children && childItem.children.length >= 1">
                             <span>{{childItem.name}}</span>
@@ -58,7 +58,7 @@
                         </span>
                     </div>
                 </div>
-                <span *ngIf="!menuItem.children || menuItem.children.length < 1">
+                <span *ngIf="!menuItem.children || menuItem.children.length < 1" (click)="onClick(menuItem.name)">
                     {{menuItem.name}}
                 </span>
             </div>

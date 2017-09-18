@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
+import { Http, HttpModule } from '@angular/http';
 
 @Component({
     selector: 'home',
@@ -10,12 +11,20 @@ import { routerTransition } from '../router.animations';
 })
 
 export class HomeComponent implements OnInit {
-    constructor (public router: Router) {
+    constructor (public router: Router, private http: Http) {
 
     }
 
+
     ngOnInit() {
 
+    }
+
+    url: string = 'http://127.0.0.1:3000/';
+    onClick(parm) {
+        this.http.get(this.url).subscribe(function (data) {
+            console.log(data)
+        })
     }
 
     onLoggedin() {
