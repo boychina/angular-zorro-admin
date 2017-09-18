@@ -22,12 +22,10 @@ export class HomeComponent implements OnInit {
 
     url: string = 'http://127.0.0.1:3000/HomeRoute/getMenusData';
     onClick(parm) {
-        this.http.get(this.url).subscribe(function (res) {
-            console.log(typeof(res));
-            console.log(res.url);
-            console.log(res);
-        })
-    }
+        this.http.get(this.url).toPromise().then((res) => {
+            console.log(JSON.parse(res.text()));
+        });
+    };
 
     onLoggedin() {
         localStorage.setItem('isLoggedin', 'true');
