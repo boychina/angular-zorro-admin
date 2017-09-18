@@ -20,10 +20,12 @@ export class HomeComponent implements OnInit {
 
     }
 
-    url: string = 'http://127.0.0.1:3000/';
+    url: string = 'http://127.0.0.1:3000/HomeRoute/getMenusData';
     onClick(parm) {
-        this.http.get(this.url).subscribe(function (data) {
-            console.log(data)
+        this.http.get(this.url).subscribe(function (res) {
+            console.log(typeof(res));
+            console.log(res.url);
+            console.log(res);
         })
     }
 
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('isLoggedin', 'true');
     }
 
-     tabs = [
+    tabs = [
         {
             name: 'Tab 1',
             index: 1
