@@ -51,4 +51,37 @@
     .ant-breadcrumb {
         height: 18px;
     }
+
+    .menus_content {
+        position: relative;
+        padding-left: 4px;
+        .anticon {
+            position: absolute;
+            right: 16px;
+            line-height: 18px;
+        }
+    }
+    .item0, .item1, .item2 {
+        display: inline-block;
+        height: 18px;
+    }
+    .item0 {
+        width: 10px;
+    }
+    .item1 {
+        width: 20px;
+    }
+    .item2 {
+        width: 30px;
+    }
+    .menu_world {
+        display: inline-block;
+        width: 140px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .menu_world.cursor {
+        cursor: pointer;
+    }
 }

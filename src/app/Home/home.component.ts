@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
-import { Http, HttpModule } from '@angular/http';
+import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
 @Component({
     selector: 'home',
@@ -19,7 +19,12 @@ export class HomeComponent implements OnInit {
     menus = [];
     ngOnInit() {
         let me = this;
-        me.http.get(this.url).toPromise().then((res) => {
+        let body = JSON.stringify({
+            code : "mk200"
+        });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        me.http.post(this.url, body, options).toPromise().then((res) => {
             //将获取到的菜单数据赋值为菜单数据
             console.log(res.json());
             me.menus = res.json();
@@ -28,11 +33,7 @@ export class HomeComponent implements OnInit {
 
     
     onClick(parm) {
-        let me = this;
-        me.http.get(this.url).toPromise().then((res) => {
-            //将获取到的菜单数据赋值为菜单数据
-            me.menus = JSON.parse(res.text());
-        });
+        
     };
 
     tabs = [

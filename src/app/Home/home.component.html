@@ -27,7 +27,7 @@
         </nz-tabset>
       </nz-header>
       <nz-layout>
-        <nz-sider [nzWidth]="200" style="background:#fff">
+        <nz-sider [nzWidth]="200" style="background:#fff" class="menus_content">
             <!-- <ul nz-menu [nzMode]="'inline'" style="height:100%">
                 <li nz-submenu *ngFor="let menuItem of menus" *ngIf="menuItem.children">
                     <span title><i class="anticon anticon-user"></i>{{menuItem.name}}</span>
@@ -44,22 +44,39 @@
                 </li>
             </ul> -->
             <div *ngFor="let menuItem of menus">
-                <div class="level0" *ngIf="menuItem.children && menuItem.children.length >= 1">
-                    <span (click)="onClick(menuItem.name)">{{menuItem.name}}</span>
-                    <div *ngFor="let childItem of menuItem.children">
-                        <div class="level1" *ngIf="childItem.children && childItem.children.length >= 1">
-                            <span>{{childItem.name}}</span>
-                            <div class="level2" *ngFor="let item of childItem.children">
-                                <span>{{item.name}}</span>
+                <div *ngIf="menuItem.children && menuItem.children.length >= 1">
+                    <span (click)="menuItem._level = !menuItem._level" class="down_arrow">
+                        <span class="item0"></span>
+                        <span class="menu_world cursor">{{menuItem.name}}</span>
+                        <i *ngIf="!menuItem._level" class="anticon anticon-down"></i>
+                        <i *ngIf="menuItem._level" class="anticon anticon-up"></i>
+                    </span>
+                    <div *ngIf="menuItem._level">
+                        <div *ngFor="let childItem of menuItem.children">
+                            <div *ngIf="childItem.children && childItem.children.length >= 1">
+                                <span class="item1"></span>
+                                <span (click)="childItem._level = !childItem._level">
+                                    <span class="menu_world cursor">{{childItem.name}}</span>
+                                    <i *ngIf="!childItem._level" class="anticon anticon-down"></i>
+                                    <i *ngIf="childItem._level" class="anticon anticon-up"></i>
+                                </span>
+                                <div *ngIf="childItem._level">
+                                    <div *ngFor="let item of childItem.children">
+                                        <span class="item2"></span>
+                                        <span class="menu_world">{{item.name}}</span>
+                                    </div>
+                                </div>
                             </div>
+                            <span *ngIf="!childItem.children || childItem.children.length < 1">
+                                <span class="item1"></span>
+                                <span class="menu_world">{{childItem.name}}</span>
+                            </span>
                         </div>
-                        <span *ngIf="!childItem.children || childItem.children.length < 1">
-                            {{childItem.name}}
-                        </span>
                     </div>
                 </div>
                 <span *ngIf="!menuItem.children || menuItem.children.length < 1" (click)="onClick(menuItem.name)">
-                    {{menuItem.name}}
+                    <span class="item0"></span>
+                    <span class="menu_world">{{menuItem.name}}</span>
                 </span>
             </div>
         </nz-sider>

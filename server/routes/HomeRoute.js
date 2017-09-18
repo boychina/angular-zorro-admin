@@ -5,7 +5,8 @@ var HomeService = require('../service/HomeService');
 var fs = require('fs');
 
 //请求home页菜单数据
-router.get('/getMenusData', function(req, res) {
+router.post('/getMenusData', function(req, res) {
+    console.log('1',req.body.code);
     HomeService.getMenusData(function(data){
         res.send(data);
     });
