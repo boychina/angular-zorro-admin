@@ -61,6 +61,7 @@
             position: absolute;
             right: 16px;
             line-height: 42px;
+            cursor: pointer;
         }
     }
     .item0, .item1, .item2 {
@@ -84,8 +85,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }
-    .menu_world.cursor {
         cursor: pointer;
     }
     /*页面滚动条样式*/

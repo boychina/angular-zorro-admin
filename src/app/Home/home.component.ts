@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
     url: string = 'http://127.0.0.1:3000/HomeRoute/getMenusData';
     menus = [];
+    selectedIndex: string = "";
     ngOnInit() {
         let me = this;
         let body = JSON.stringify({
@@ -63,16 +64,26 @@ export class HomeComponent implements OnInit {
         }
     ];
     
-
     closeTab(tab) {
         this.tabs.splice(this.tabs.indexOf(tab), 1);
     };
 
-    newTab() {
+    newTab(_id) {
+        console.log(">>>", _id);
         let i = 10;
-        this.tabs.push({
-            name: 'New Tab',
-            index: ++i
+        let me = this;
+        let hasRepeat = false;
+        // 打开新的标签页之前进行标签去重
+        me.tabs.map((value) => {
+            if (value.index === _id) {
+                hasRepeat = true;
+            }
+        });
+        // 如果在tabs中有重复的数据，则不添加该项到tabs数组中
+        if(hasRepeat) return;
+        me.tabs.push({
+            name: _id,
+            index: _id
         });
     };
 }

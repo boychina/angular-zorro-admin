@@ -2,7 +2,7 @@
     <nz-layout class="layout">
       <nz-header>
         <div class="logo"></div>
-        <nz-tabset class="tabs" [nzType]="'card'">
+        <nz-tabset class="tabs" [nzType]="'card'" [(nzSelectedIndex)]="selectedIndex">
             <nz-tab *ngFor="let tab of tabs">
                 <ng-template #nzTabHeading>
                     <div class="tab-item">
@@ -15,7 +15,7 @@
                         <nz-breadcrumb style="margin:12px 0; line-height: 12px">
                             <nz-breadcrumb-item>Home</nz-breadcrumb-item>
                             <nz-breadcrumb-item>List</nz-breadcrumb-item>
-                            <nz-breadcrumb-item>App</nz-breadcrumb-item>
+                            <nz-breadcrumb-item>{{tab.name}}</nz-breadcrumb-item>
                         </nz-breadcrumb>
                         <nz-content class='content' style="background:#fff; padding: 24px;">Content {{tab.name}}</nz-content>
                     </nz-layout>
@@ -47,7 +47,7 @@
                 <div *ngIf="menuItem.children && menuItem.children.length >= 1">
                     <span (click)="menuItem._level = !menuItem._level" class="down_arrow">
                         <span class="item0"></span>
-                        <span class="menu_world cursor" [title]="menuItem.name">{{menuItem.name}}</span>
+                        <span class="menu_world" [title]="menuItem.name">{{menuItem.name}}</span>
                         <i *ngIf="!menuItem._level" class="anticon anticon-down"></i>
                         <i *ngIf="menuItem._level" class="anticon anticon-up"></i>
                     </span>
@@ -56,27 +56,27 @@
                             <div *ngIf="childItem.children && childItem.children.length >= 1">
                                 <span class="item1"></span>
                                 <span (click)="childItem._level = !childItem._level">
-                                    <span class="menu_world cursor" [title]="childItem.name">{{childItem.name}}</span>
+                                    <span class="menu_world" [title]="childItem.name">{{childItem.name}}</span>
                                     <i *ngIf="!childItem._level" class="anticon anticon-down"></i>
                                     <i *ngIf="childItem._level" class="anticon anticon-up"></i>
                                 </span>
                                 <div *ngIf="childItem._level">
                                     <div *ngFor="let item of childItem.children" class="level0">
                                         <span class="item2"></span>
-                                        <span class="menu_world" [title]="item.name">{{item.name}}</span>
+                                        <span class="menu_world" [title]="item.name" (click)="newTab(item.id)">{{item.name}}</span>
                                     </div>
                                 </div>
                             </div>
                             <span *ngIf="!childItem.children || childItem.children.length < 1">
                                 <span class="item1"></span>
-                                <span class="menu_world" [title]="childItem.name">{{childItem.name}}</span>
+                                <span class="menu_world" [title]="childItem.name" (click)="newTab(childItem.id)">{{childItem.name}}</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <span *ngIf="!menuItem.children || menuItem.children.length < 1" (click)="onClick(menuItem.name)">
                     <span class="item0"></span>
-                    <span class="menu_world" [title]="menuItem.name">{{menuItem.name}}</span>
+                    <span class="menu_world" [title]="menuItem.name" (click)="newTab(menuItem.id)">{{menuItem.name}}</span>
                 </span>
             </div>
         </nz-sider>
