@@ -13,8 +13,7 @@
                 <div class="home_container">
                     <nz-layout style="padding:0 24px 24px">
                         <nz-breadcrumb style="margin:12px 0; line-height: 12px">
-                            <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-                            <nz-breadcrumb-item>List</nz-breadcrumb-item>
+                            <nz-breadcrumb-item>BMS</nz-breadcrumb-item>
                             <nz-breadcrumb-item>{{tab.name}}</nz-breadcrumb-item>
                         </nz-breadcrumb>
                         <nz-content class='content' style="background:#fff; padding: 24px;">Content {{tab.name}}</nz-content>
@@ -60,20 +59,20 @@
                                 <div *ngIf="childItem.id === childItemId">
                                     <div *ngFor="let item of childItem.children" class="level0">
                                         <span class="item2"></span>
-                                        <span class="menu_world" [title]="item.name" (click)="newTab(item.id)">{{item.name}}</span>
+                                        <span class="menu_world" [title]="item.name" (click)="openNewTab(item)">{{item.name}}</span>
                                     </div>
                                 </div>
                             </div>
                             <span *ngIf="!childItem.children || childItem.children.length < 1">
                                 <span class="item1"></span>
-                                <span class="menu_world" [title]="childItem.name" (click)="newTab(childItem.id)">{{childItem.name}}</span>
+                                <span class="menu_world" [title]="childItem.name" (click)="openNewTab(childItem)">{{childItem.name}}</span>
                             </span>
                         </div>
                     </div>
                 </div>
                 <span *ngIf="!menuItem.children || menuItem.children.length < 1">
                     <span class="item0"></span>
-                    <span class="menu_world" [title]="menuItem.name" (click)="newTab(menuItem.id)">{{menuItem.name}}</span>
+                    <span class="menu_world" [title]="menuItem.name" (click)="openNewTab(menuItem)">{{menuItem.name}}</span>
                 </span>
             </div>
         </nz-sider>

@@ -50,16 +50,14 @@ export class HomeComponent implements OnInit {
         } else {
             return ;
         }
-        console.log(parm);
         me.tabs.push({
-            name: parm.id,
+            name: parm.name,
             index: parm.id
         });
     };
     
     closeTab(tab) {
         let me = this;
-        console.log("tab", tab);
         if(me.tabs.indexOf(tab) < me.selectedIndex){
             //tabs删除功能优化，保证删除当前选中的tab之前的tab时，页面显示的还是当前tab
             me.selectedIndex--;
@@ -67,22 +65,19 @@ export class HomeComponent implements OnInit {
         this.tabs.splice(me.tabs.indexOf(tab), 1);
     };
 
-    newTab(_id) {
-        let i = 10;
+    openNewTab(item) {
         let me = this;
         let hasRepeat = false;
-
         // 打开新的标签页之前进行标签去重
         me.tabs.map((value) => {
-            if (value.index === _id) {
+            if (value.index === item.id) {
                 hasRepeat = true;
             }
         });
-
         // 如果在tabs中有重复的数据，则不添加该项到tabs数组中
         if(hasRepeat) {
             me.tabs.map((value, index) => {
-                if(value.index === _id) {
+                if(value.index === item.id) {
                     me.selectedIndex = index;
                 }
             });
@@ -90,8 +85,8 @@ export class HomeComponent implements OnInit {
         };
         me.selectedIndex = me.tabs.length;
         me.tabs.push({
-            name: _id,
-            index: _id
+            name: item.name,
+            index: item.id
         });    
     };
 
