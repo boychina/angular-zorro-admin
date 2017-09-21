@@ -39,39 +39,23 @@ export class HomeComponent implements OnInit {
             console.log(res.json());
             me.menus = res.json();
             me.setDefaultTab(me.menus);//设置默认打开的标签页
-            me.treeData2ArrayData(me.menus, []);//把请求到的树型数据转为纯数组
-            console.log("me.menusArrayData",me.menusArrayData);
+            me.treeData2ArrayData(me.menus);//把请求到的树型数据转为纯数组
         });
     };
 
-    treeData2ArrayData(treeData, breadcrumbArray){
+    treeData2ArrayData(treeData){
         /**
          * 用来将树型数组数据转换为纯数组
          */
         let me = this;
         
         treeData.map((value) => {
-            if(value.children && value.children.length > 0) {
-                me.treeData2ArrayData(value.children, breadcrumbArray);
-                breadcrumbArray = [];
-            } else {
-                breadcrumbArray.unshift(value.name);
-                value.tabBreadcrumb = breadcrumbArray;
-                breadcrumbArray = [];
-            }
             me.menusArrayData.push(value);
+            if(value.children && value.children.length > 0) {
+                me.treeData2ArrayData(value.children);
+            }
         })
     };
-
-    // generateBreadcrumbArray(parm){
-    //     /**
-    //      * 用来生成页面tab标签下面的面包屑数组
-    //      */
-    //     let me = this;
-    //     me.menusArrayData.map(() => {
-
-    //     })
-    // };
 
     setDefaultTab(menus) {
         /**
@@ -90,16 +74,10 @@ export class HomeComponent implements OnInit {
         } else {
             return ;
         }
-        let breadcrumbArray;
-        me.menusArrayData.map((value) => {
-            if(value.id === parm.id){
-                breadcrumbArray = value.tabBreadcrumb;
-            }
-        });
         me.tabs.push({
             name: parm.name,
             index: parm.id,
-            tabBreadcrumb: breadcrumbArray
+            tabBreadcrumb: []
         });
     };
     
@@ -121,8 +99,11 @@ export class HomeComponent implements OnInit {
          * 打开新的tab标签页方法
          * @type {[Object: 当前parm对象]}
          */
+        console.log(arguments);
+        let arg = Array.from(arguments);
         let me = this;
         let hasRepeat = false;
+        let breadcrumbArray = [];
         // 打开新的标签页之前进行标签去重
         me.tabs.map((value) => {
             if (value.index === parm.id) {
@@ -138,13 +119,10 @@ export class HomeComponent implements OnInit {
             });
             return;
         };
-        me.selectedIndex = me.tabs.length;
-        let breadcrumbArray;
-        me.menusArrayData.map((value) => {
-            if(value.id === parm.id){
-                breadcrumbArray = value.tabBreadcrumb;
-            }
+        arg.map((value) => {
+            breadcrumbArray.unshift(value.name);
         });
+        me.selectedIndex = me.tabs.length;
         me.tabs.push({
             name: parm.name,
             index: parm.id,

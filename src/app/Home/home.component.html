@@ -59,13 +59,13 @@
                                 <div *ngIf="childItem.id === childItemId">
                                     <div *ngFor="let item of childItem.children" class="level0">
                                         <span class="item2"></span>
-                                        <span class="menu_world" [title]="item.name" (click)="openNewTab(item)">{{item.name}}</span>
+                                        <span class="menu_world" [title]="item.name" (click)="openNewTab(item, childItem, menuItem)">{{item.name}}</span>
                                     </div>
                                 </div>
                             </div>
                             <span *ngIf="!childItem.children || childItem.children.length < 1">
                                 <span class="item1"></span>
-                                <span class="menu_world" [title]="childItem.name" (click)="openNewTab(childItem)">{{childItem.name}}</span>
+                                <span class="menu_world" [title]="childItem.name" (click)="openNewTab(childItem, menuItem)">{{childItem.name}}</span>
                             </span>
                         </div>
                     </div>
