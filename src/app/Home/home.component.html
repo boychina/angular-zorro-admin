@@ -45,22 +45,22 @@
             </ul> -->
             <div *ngFor="let menuItem of menus" class="level0">
                 <div *ngIf="menuItem.children && menuItem.children.length >= 1">
-                    <span (click)="menuItem._level = !menuItem._level" class="down_arrow">
+                    <span (click)="onClickMenuItem(menuItem.id)" class="down_arrow">
                         <span class="item0"></span>
                         <span class="menu_world" [title]="menuItem.name">{{menuItem.name}}</span>
-                        <i *ngIf="!menuItem._level" class="anticon anticon-down"></i>
-                        <i *ngIf="menuItem._level" class="anticon anticon-up"></i>
+                        <i *ngIf="!(menuItem.id === menuItemId)" class="anticon anticon-down"></i>
+                        <i *ngIf="menuItem.id === menuItemId" class="anticon anticon-up"></i>
                     </span>
-                    <div *ngIf="menuItem._level">
+                    <div *ngIf="menuItem.id === menuItemId">
                         <div *ngFor="let childItem of menuItem.children" class="level0">
                             <div *ngIf="childItem.children && childItem.children.length >= 1">
                                 <span class="item1"></span>
-                                <span (click)="childItem._level = !childItem._level">
+                                <span (click)="onClickChildItem(childItem.id)">
                                     <span class="menu_world" [title]="childItem.name">{{childItem.name}}</span>
-                                    <i *ngIf="!childItem._level" class="anticon anticon-down"></i>
-                                    <i *ngIf="childItem._level" class="anticon anticon-up"></i>
+                                    <i *ngIf="!(childItem.id === childItemId)" class="anticon anticon-down"></i>
+                                    <i *ngIf="childItem.id === childItemId" class="anticon anticon-up"></i>
                                 </span>
-                                <div *ngIf="childItem._level">
+                                <div *ngIf="childItem.id === childItemId">
                                     <div *ngFor="let item of childItem.children" class="level0">
                                         <span class="item2"></span>
                                         <span class="menu_world" [title]="item.name" (click)="newTab(item.id)">{{item.name}}</span>

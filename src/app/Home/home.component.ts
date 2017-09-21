@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
     url: string = 'http://127.0.0.1:3000/HomeRoute/getMenusData';
     menus = [];
     selectedIndex: string = "";
+    menuItemId: string = "";
+    childItemId: string = "";
     ngOnInit() {
         let me = this;
         let body = JSON.stringify({
@@ -85,5 +87,31 @@ export class HomeComponent implements OnInit {
             name: _id,
             index: _id
         });
+    };
+
+    onClickMenuItem(_id) {
+        let me = this;
+        if(_id === me.menuItemId) {
+            me.menuItemId = "";
+        } else {
+            me.menuItemId = _id;
+        }
+    };
+
+    onClickChildItem(_id) {
+        let me = this;
+        if(_id === me.childItemId) {
+            me.childItemId = "";
+        } else {
+            me.childItemId = _id;
+        }
+    };
+    
+    ngOnChanges() {
+
+    };
+
+    ngAfterContentChecked() {
+
     };
 }
