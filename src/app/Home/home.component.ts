@@ -16,13 +16,17 @@ export class HomeComponent implements OnInit {
     }
 
     url: string = 'http://127.0.0.1:3000/HomeRoute/getMenusData';
-    menus = [];
-    selectedIndex: number = 0;
-    menuItemId: string = "";
-    childItemId: string = "";
-    tabs = [];
+    menus = [];                           //保存请求到的所有的菜单数据
+    selectedIndex: number = 0;            //保存tab标签当前选中的标签序列
+    menuItemId: string = "";              //保存菜单栏操作的第一层菜单的id
+    childItemId: string = "";             //保存菜单栏操作的第二层菜单的id
+    tabs = [];                            //保存tab标签栏中的数据
 
     ngOnInit() {
+        /**
+         * 生命周期钩子函数：当Angular初始化完成数据绑定的输入属性后，用来初始化指令或者组件。
+         * @type {[type]}
+         */
         let me = this;
         let body = JSON.stringify({
             code : "mk200"
@@ -38,6 +42,10 @@ export class HomeComponent implements OnInit {
     };
 
     setDefaultTab(menus) {
+        /**
+         * 设置页面打开的默认展开标签页
+         * @type {[Array: 请求到的所有菜单数据]}
+         */
         let me = this,
             parm;
         if(menus.length !== 0){
@@ -57,6 +65,10 @@ export class HomeComponent implements OnInit {
     };
     
     closeTab(tab) {
+        /**
+         * 关闭当前tab页签方法
+         * @type {[Object: 点击的当前tab对象]}
+         */
         let me = this;
         if(me.tabs.indexOf(tab) < me.selectedIndex){
             //tabs删除功能优化，保证删除当前选中的tab之前的tab时，页面显示的还是当前tab
@@ -66,6 +78,10 @@ export class HomeComponent implements OnInit {
     };
 
     openNewTab(item) {
+        /**
+         * 打开新的tab标签页方法
+         * @type {[Object: 当前item对象]}
+         */
         let me = this;
         let hasRepeat = false;
         // 打开新的标签页之前进行标签去重
@@ -91,6 +107,10 @@ export class HomeComponent implements OnInit {
     };
 
     onClickMenuItem(_id) {
+        /**
+         * 用来控制第一层菜单隐藏和显示的方法
+         * @type {[String: 用来表示当前操作的菜单的id]}
+         */
         let me = this;
         if(_id === me.menuItemId) {
             me.menuItemId = "";
@@ -100,16 +120,15 @@ export class HomeComponent implements OnInit {
     };
 
     onClickChildItem(_id) {
+        /**
+         * 用来控制第二层菜单隐藏和显示的方法
+         * @type {[String: 用来表示当前操作的菜单的id]}
+         */
         let me = this;
         if(_id === me.childItemId) {
             me.childItemId = "";
         } else {
             me.childItemId = _id;
         }
-    };
-    
-
-    ngAfterContentChecked() {
-
     };
 }
