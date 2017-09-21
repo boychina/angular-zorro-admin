@@ -37,10 +37,6 @@ export class HomeComponent implements OnInit {
         });
     };
 
-    // ngDoCheck(value) {
-    //     // console.log("value", value);
-    // };
-
     setDefaultTab(menus) {
         let me = this,
             parm;
@@ -59,11 +55,16 @@ export class HomeComponent implements OnInit {
             name: parm.id,
             index: parm.id
         });
-        console.log("me.tabs",me.tabs);
     };
     
     closeTab(tab) {
-        this.tabs.splice(this.tabs.indexOf(tab), 1);
+        let me = this;
+        console.log("tab", tab);
+        if(me.tabs.indexOf(tab) < me.selectedIndex){
+            //tabs删除功能优化，保证删除当前选中的tab之前的tab时，页面显示的还是当前tab
+            me.selectedIndex--;
+        }
+        this.tabs.splice(me.tabs.indexOf(tab), 1);
     };
 
     newTab(_id) {

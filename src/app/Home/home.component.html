@@ -7,6 +7,7 @@
                 <ng-template #nzTabHeading>
                     <div class="tab-item">
                         {{tab.name}}
+                        <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
                     </div>
                 </ng-template>
                 <div class="home_container">
@@ -20,9 +21,6 @@
                     </nz-layout>
                 </div>
             </nz-tab>
-            <ng-template #nzTabBarExtraContent>
-                <i class="ant-tabs-new-tab anticon anticon-plus" (click)="newTab()"></i>
-            </ng-template>
         </nz-tabset>
       </nz-header>
       <nz-layout>
