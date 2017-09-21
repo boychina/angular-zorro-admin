@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
     url: string = 'http://127.0.0.1:3000/HomeRoute/getMenusData';
     menus = [];
-    selectedIndex: string = "";
+    selectedIndex: number = 2;
     menuItemId: string = "";
     childItemId: string = "";
     ngOnInit() {
@@ -41,28 +41,8 @@ export class HomeComponent implements OnInit {
 
     tabs = [
         {
-            name: 'Tab 1',
-            index: 1
-        },
-        {
-            name: 'Tab 2',
-            index: 2
-        },
-        {
-            name: 'Tab 3',
-            index: 3
-        },
-        {
-            name: 'Tab 4',
-            index: 4
-        },
-        {
-            name: 'Tab 5',
-            index: 5
-        },
-        {
-            name: 'Tab 6',
-            index: 6
+            name: "6601",
+            index: "6601"
         }
     ];
     
@@ -71,22 +51,31 @@ export class HomeComponent implements OnInit {
     };
 
     newTab(_id) {
-        console.log(">>>", _id);
         let i = 10;
         let me = this;
         let hasRepeat = false;
+
         // 打开新的标签页之前进行标签去重
         me.tabs.map((value) => {
             if (value.index === _id) {
                 hasRepeat = true;
             }
         });
+
         // 如果在tabs中有重复的数据，则不添加该项到tabs数组中
-        if(hasRepeat) return;
+        if(hasRepeat) {
+            me.tabs.map((value, index) => {
+                if(value.index === _id) {
+                    me.selectedIndex = index;
+                }
+            });
+            return;
+        };
+        me.selectedIndex = me.tabs.length;
         me.tabs.push({
             name: _id,
             index: _id
-        });
+        });    
     };
 
     onClickMenuItem(_id) {
