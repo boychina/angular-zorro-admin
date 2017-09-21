@@ -7,7 +7,6 @@
                 <ng-template #nzTabHeading>
                     <div class="tab-item">
                         {{tab.name}}
-                        <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
                     </div>
                 </ng-template>
                 <div class="home_container">
@@ -74,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                <span *ngIf="!menuItem.children || menuItem.children.length < 1" (click)="onClick(menuItem.name)">
+                <span *ngIf="!menuItem.children || menuItem.children.length < 1">
                     <span class="item0"></span>
                     <span class="menu_world" [title]="menuItem.name" (click)="newTab(menuItem.id)">{{menuItem.name}}</span>
                 </span>
