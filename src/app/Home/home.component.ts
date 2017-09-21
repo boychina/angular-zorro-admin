@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     menuItemId: string = "";              //保存菜单栏操作的第一层菜单的id
     childItemId: string = "";             //保存菜单栏操作的第二层菜单的id
     tabs = [];                            //保存tab标签栏中的数据
+    menusArrayData = [];                  //创建一个变量用来保存将菜单树型数据转为纯数组数据
 
     ngOnInit() {
         /**
@@ -37,9 +38,40 @@ export class HomeComponent implements OnInit {
             //将获取到的菜单数据赋值为菜单数据
             console.log(res.json());
             me.menus = res.json();
-            me.setDefaultTab(me.menus);
+            me.setDefaultTab(me.menus);//设置默认打开的标签页
+            me.treeData2ArrayData(me.menus, []);//把请求到的树型数据转为纯数组
+            console.log("me.menusArrayData",me.menusArrayData);
         });
     };
+
+    treeData2ArrayData(treeData, breadcrumbArray){
+        /**
+         * 用来将树型数组数据转换为纯数组
+         */
+        let me = this;
+        
+        treeData.map((value) => {
+            if(value.children && value.children.length > 0) {
+                me.treeData2ArrayData(value.children, breadcrumbArray);
+                breadcrumbArray = [];
+            } else {
+                breadcrumbArray.unshift(value.name);
+                value.tabBreadcrumb = breadcrumbArray;
+                breadcrumbArray = [];
+            }
+            me.menusArrayData.push(value);
+        })
+    };
+
+    // generateBreadcrumbArray(parm){
+    //     /**
+    //      * 用来生成页面tab标签下面的面包屑数组
+    //      */
+    //     let me = this;
+    //     me.menusArrayData.map(() => {
+
+    //     })
+    // };
 
     setDefaultTab(menus) {
         /**
@@ -58,9 +90,16 @@ export class HomeComponent implements OnInit {
         } else {
             return ;
         }
+        let breadcrumbArray;
+        me.menusArrayData.map((value) => {
+            if(value.id === parm.id){
+                breadcrumbArray = value.tabBreadcrumb;
+            }
+        });
         me.tabs.push({
             name: parm.name,
-            index: parm.id
+            index: parm.id,
+            tabBreadcrumb: breadcrumbArray
         });
     };
     
@@ -77,32 +116,39 @@ export class HomeComponent implements OnInit {
         this.tabs.splice(me.tabs.indexOf(tab), 1);
     };
 
-    openNewTab(item) {
+    openNewTab(parm) {
         /**
          * 打开新的tab标签页方法
-         * @type {[Object: 当前item对象]}
+         * @type {[Object: 当前parm对象]}
          */
         let me = this;
         let hasRepeat = false;
         // 打开新的标签页之前进行标签去重
         me.tabs.map((value) => {
-            if (value.index === item.id) {
+            if (value.index === parm.id) {
                 hasRepeat = true;
             }
         });
         // 如果在tabs中有重复的数据，则不添加该项到tabs数组中
         if(hasRepeat) {
             me.tabs.map((value, index) => {
-                if(value.index === item.id) {
+                if(value.index === parm.id) {
                     me.selectedIndex = index;
                 }
             });
             return;
         };
         me.selectedIndex = me.tabs.length;
+        let breadcrumbArray;
+        me.menusArrayData.map((value) => {
+            if(value.id === parm.id){
+                breadcrumbArray = value.tabBreadcrumb;
+            }
+        });
         me.tabs.push({
-            name: item.name,
-            index: item.id
+            name: parm.name,
+            index: parm.id,
+            tabBreadcrumb: breadcrumbArray
         });    
     };
 

@@ -14,7 +14,7 @@
                     <nz-layout style="padding:0 24px 24px">
                         <nz-breadcrumb style="margin:12px 0; line-height: 12px">
                             <nz-breadcrumb-item>BMS</nz-breadcrumb-item>
-                            <nz-breadcrumb-item>{{tab.name}}</nz-breadcrumb-item>
+                            <nz-breadcrumb-item *ngFor="let bItem of tab.tabBreadcrumb">{{ bItem }}</nz-breadcrumb-item>
                         </nz-breadcrumb>
                         <nz-content class='content' style="background:#fff; padding: 24px;">Content {{tab.name}}</nz-content>
                     </nz-layout>
