@@ -63,12 +63,15 @@ export class HomeComponent implements OnInit {
          * @type {[Array: 请求到的所有菜单数据]}
          */
         let me = this,
-            parm;
+            parm,
+            breadcrumbArray = [];
         if(menus.length !== 0){
             parm = me.menus[0];
+            breadcrumbArray.unshift(parm.name);
             for(let i=0; i < 3; i++){
                 if(parm.children && parm.children.length !== 0) {
                     parm = parm.children[0];
+                    breadcrumbArray.unshift(parm.name);
                 }
             }
         } else {
@@ -77,7 +80,7 @@ export class HomeComponent implements OnInit {
         me.tabs.push({
             name: parm.name,
             index: parm.id,
-            tabBreadcrumb: []
+            tabBreadcrumb: breadcrumbArray
         });
     };
     
