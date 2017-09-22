@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
     menuItemId: string = "";              //保存菜单栏操作的第一层菜单的id
     childItemId: string = "";             //保存菜单栏操作的第二层菜单的id
     tabs = [];                            //保存tab标签栏中的数据
-    menusArrayData = [];                  //创建一个变量用来保存将菜单树型数据转为纯数组数据
 
     ngOnInit() {
         /**
@@ -39,22 +38,7 @@ export class HomeComponent implements OnInit {
             console.log(res.json());
             me.menus = res.json();
             me.setDefaultTab(me.menus);//设置默认打开的标签页
-            me.treeData2ArrayData(me.menus);//把请求到的树型数据转为纯数组
         });
-    };
-
-    treeData2ArrayData(treeData){
-        /**
-         * 用来将树型数组数据转换为纯数组
-         */
-        let me = this;
-        
-        treeData.map((value) => {
-            me.menusArrayData.push(value);
-            if(value.children && value.children.length > 0) {
-                me.treeData2ArrayData(value.children);
-            }
-        })
     };
 
     setDefaultTab(menus) {
@@ -102,11 +86,10 @@ export class HomeComponent implements OnInit {
          * 打开新的tab标签页方法
          * @type {[Object: 当前parm对象]}
          */
-        console.log(arguments);
-        let arg = Array.from(arguments);
-        let me = this;
-        let hasRepeat = false;
-        let breadcrumbArray = [];
+        let arg = Array.from(arguments),
+            me = this,
+            hasRepeat = false,
+            breadcrumbArray = [];
         // 打开新的标签页之前进行标签去重
         me.tabs.map((value) => {
             if (value.index === parm.id) {
