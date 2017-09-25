@@ -16,7 +16,9 @@
                             <nz-breadcrumb-item>BMS</nz-breadcrumb-item>
                             <nz-breadcrumb-item *ngFor="let bItem of tab.tabBreadcrumb">{{ bItem }}</nz-breadcrumb-item>
                         </nz-breadcrumb>
-                        <nz-content class='content' style="background:#fff; padding: 24px;">Content {{tab.name}}</nz-content>
+                        <nz-content class='content' style="background:#fff; padding: 24px;">
+                            <router-outlet></router-outlet>
+                        </nz-content>
                     </nz-layout>
                 </div>
             </nz-tab>
