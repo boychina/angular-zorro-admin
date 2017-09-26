@@ -26,21 +26,6 @@
     </nz-header>
     <nz-layout>
         <nz-sider [nzWidth]="200" style="background:#fff" class="menus_content">
-            <!-- <ul nz-menu [nzMode]="'inline'" style="height:100%">
-                <li nz-submenu *ngFor="let menuItem of menus" *ngIf="menuItem.children">
-                    <span title><i class="anticon anticon-user"></i>{{menuItem.name}}</span>
-                    <ul *ngIf="menuItem.children">
-                        <li nz-submenu *ngFor="let childItem of menuItem.children">
-                            <span title>{{childItem.name}}</span>
-                            <ul *ngIf="childItem.children">
-                                <li nz-menu-item *ngFor="let item of childItem.children">
-                                    <span title>{{item.name}}</span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul> -->
             <div *ngFor="let menuItem of menus" class="level0">
                 <div *ngIf="menuItem.children && menuItem.children.length >= 1">
                     <span (click)="onClickMenuItem(menuItem.id)" class="down_arrow">
