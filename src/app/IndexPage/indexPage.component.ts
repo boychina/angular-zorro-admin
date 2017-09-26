@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
+import { geoCoordMap } from '../../utils/geoCoordMap';
+
 @Component({
     selector: 'indexPage',
     templateUrl: './indexpage.component.html',
@@ -19,7 +21,7 @@ export class IndexPageComponent implements OnInit {
     }
 
     ngOnInit () {
-
+        console.log("geoCoordMap", geoCoordMap);
     }
 
     datamapvalue = [
