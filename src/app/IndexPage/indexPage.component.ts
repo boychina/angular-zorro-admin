@@ -24,6 +24,58 @@ export class IndexPageComponent implements OnInit {
         console.log("geoCoordMap", geoCoordMap);
     }
 
+    topLineOption = {
+        title: {
+            text: '未来一周气温变化',
+            subtext: ''
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['最高气温','最低气温']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {},
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一','周二','周三','周四','周五','周六','周日']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} °C'
+            }
+        },
+        series: [
+            {
+                name:'最高气温',
+                type:'line',
+                data:[11, 11, 15, 13, 12, 13, 10],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    }
+
     datamapvalue = [
         {name: '海门', value: [121.15,31.89,9]},
         {name: '鄂尔多斯', value: [109.781327,39.608266,12]},
@@ -38,7 +90,7 @@ export class IndexPageComponent implements OnInit {
     ];
 
     mapOption = {
-        backgroundColor: '#404a59',
+        backgroundColor: '#fff',
         title: {
             text: '全国主要城市空气质量',
             subtext: 'data from PM25.in',

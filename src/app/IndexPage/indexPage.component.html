@@ -1,3 +1,18 @@
-<button>Hello World!</button>
-
-<div echarts [options] = "mapOption" [loading]="showloading" class="echarts_map_container"></div>
+<div class="indexpage">
+    <div nz-row>
+        <div nz-col [nzSpan]="24">
+            <div echarts [options] = "topLineOption" [loading] = "showloading" class="echarts_topline_container"></div>
+        </div>
+    </div>
+    <div nz-row>
+        <div nz-col [nzSpan]="8">
+            col-8
+        </div>
+        <div nz-col [nzSpan]="8">
+            <div echarts [options] = "mapOption" [loading]="showloading" class="echarts_map_container"></div>
+        </div>
+        <div nz-col [nzSpan]="8">
+        col-8
+        </div>
+    </div>
+</div>
