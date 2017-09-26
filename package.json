@@ -25,9 +25,11 @@
     "@ngx-translate/core": "^7.0.0",
     "@ngx-translate/http-loader": "^0.1.0",
     "core-js": "^2.4.1",
+    "echarts": "^3.7.1",
     "font-awesome": "^4.7.0",
-    "ng2-charts": "^1.6.0",
     "ng-zorro-antd": "^0.5.0-rc.0",
+    "ng2-charts": "^1.6.0",
+    "ngx-echarts": "^1.2.4",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
