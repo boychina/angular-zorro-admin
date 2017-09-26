@@ -4,6 +4,7 @@ import { routerTransition } from '../router.animations';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
 import { geoCoordMap } from '../../utils/geoCoordMap';
+import { dateFormat } from '../../utils/dateFormat';
 
 @Component({
     selector: 'indexPage',
@@ -14,103 +15,133 @@ import { geoCoordMap } from '../../utils/geoCoordMap';
 
 export class IndexPageComponent implements OnInit {
     showloading: boolean = true;
+    topLineOption: any;
     constructor(public router: Router, private http: Http) {
         setTimeout(() => {
             this.showloading = false;
         }, 3000);
     }
 
+    topLineDataUrl: string = "http://127.0.0.1:3000/IndexPageRoute/getTopLineChartsData";
+    xAxisData: string[] = [];
+    seriesData: string[] = [];
+
     ngOnInit () {
-        console.log("geoCoordMap", geoCoordMap);
+        /**
+         * 当Angular组件初始化完成数据绑定的输入属性后，用来初始化指令或者组件。
+         */
+        let me = this;
+        let body = JSON.stringify({
+               
+        });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        me.http.post(me.topLineDataUrl, body, options).toPromise().then((res) => {
+            me.xAxisData = me.dateFormatFun(res.json().xAxis);
+            me.seriesData = res.json().amounts;
+            me.setOption();
+        })
     }
 
-    topLineOption = {
-        tooltip : {
-            trigger: 'axis',
-            // alwaysShowContent: false,
-            axisPointer : {
-                type : 'shadow',
-                shadowStyle:{
-                    color:'rgba(0, 160, 233, 0.4)'
+    dateFormatFun(arr){
+        let arrays = [];
+        arr.map((val) => {
+            arrays.push(dateFormat(val*1000, 'hh:ii'));
+        })
+        return arrays;
+    }
+
+    setOption() {
+        let me = this;
+        me.topLineOption = {
+            tooltip : {
+                trigger: 'axis',
+                // alwaysShowContent: false,
+                axisPointer : {
+                    type : 'shadow',
+                    shadowStyle:{
+                        color:'rgba(0, 160, 233, 0.4)'
+                    }
+                },
+                formatter:function(params){
+                    if(Array.isArray(params)==true){
+                        return "Time:"+params[0].name+"<br>"+"Alarm Number:"+params[0].value
+                    }
                 }
             },
-            formatter:function(params){
-                if(Array.isArray(params)==true){
-                    return "Time:"+params[0].name+"<br>"+"Alarm Number:"+params[0].value
+            grid: {
+                left: 0,
+                right: 40,
+                bottom: 0,
+                top: 50,
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    nameTextStyle:{
+                        color:'#666',
+                        fontFamily:'Arial',
+                        fontSize:'0.12rem'
+                    },
+                    axisLine:{show:false},
+                    axisTick:{show:false},
+                    axisLabel:{
+                        show:true,
+                        textStyle:{
+                            color: "#222"
+                        }
+                    },
+                    boundaryGap : false,
+                    data:me.xAxisData
                 }
-            }
-        },
-        grid: {
-            left: 0,
-            right: 40,
-            bottom: 0,
-            top: 50,
-            containLabel: true
-        },
-        xAxis : [
-            {
-                type : 'category',
-                nameTextStyle:{
-                    color:'#666',
-                    fontFamily:'Arial',
-                    fontSize:'0.12rem'
-                },
-                axisLine:{show:false},
-                axisTick:{show:false},
-                axisLabel:{
-                    show:true,
-                    textStyle:{
-                        color: "#222"
-                    }
-                },
-                boundaryGap : false,
-                data:[]
-            }
-        ],
-        yAxis : [
-            {
+            ],
+            yAxis : [
+                {
 
-                type : 'value',
-                axisLine:{show:false},
-                axisTick:{show:false},
-                splitNumber:3,
-                splitLine:{
-                    lineStyle:{
-                        type:'dotted'
-                    }
-                },
-                axisLabel:{
-                    textStyle:{
-                        color: "#222"
+                    type : 'value',
+                    axisLine:{show:false},
+                    axisTick:{show:false},
+                    splitNumber:3,
+                    splitLine:{
+                        lineStyle:{
+                            type:'dotted'
+                        }
+                    },
+                    axisLabel:{
+                        textStyle:{
+                            color: "#222"
+                        }
                     }
                 }
-            }
-        ],
-        series : [
-            {
-                name:'',
-                showSymbol:false,
-                type:'line',
-                smooth:true,
-                itemStyle:{
-                    normal:{
-                        borderColor:'#00a0e9'
-                    }
-                },
-                lineStyle:{
+            ],
+            series : [
+                {
+                    name:'',
+                    showSymbol:false,
+                    type:'line',
+                    smooth:true,
+                    itemStyle:{
+                        normal:{
+                            borderColor:'#00a0e9'
+                        }
+                    },
+                    lineStyle:{
+                            normal: {
+                            color:'#00a0e9' 
+                        }
+                    },
+                    areaStyle: {
                         normal: {
-                        color:'#00a0e9' 
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color:'rgba(0,160,233,.2)'
-                    }
-                },
-                data:[]
-            }
-        ]
+                            color:'rgba(0,160,233,.2)'
+                        }
+                    },
+                    data:me.seriesData
+                }
+            ]
+        }
     }
+    
 
     datamapvalue = [
         {name: '海门', value: [121.15,31.89,9]},

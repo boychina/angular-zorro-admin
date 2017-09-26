@@ -29,11 +29,11 @@ export class HomeComponent implements OnInit {
          */
         let me = this;
         let body = JSON.stringify({
-            code : "mk200"
+            
         });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        me.http.post(this.url, body, options).toPromise().then((res) => {
+        me.http.post(me.url, body, options).toPromise().then((res) => {
             //将获取到的菜单数据赋值为菜单数据
             console.log(res.json());
             me.menus = res.json();
