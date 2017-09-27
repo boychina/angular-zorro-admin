@@ -41,12 +41,7 @@ export class IndexPageComponent implements OnInit {
         me.http.post(me.topLineDataUrl, body, options).toPromise().then((res) => {
             me.xAxisData = me.dateFormatFun(res.json().xAxis);
             me.seriesData = res.json().amounts;
-            console.log(">>>", me.xAxisData);
         })
-    }
-
-    ngAfterContentInit () {
-        
     }
 
     dateFormatFun(arr){

@@ -1,15 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TopLineComponent } from './topLine.component';
+import { VipUserComponent } from './vipUser.component';
 
-describe('TopLineComponent', () => {
-    let component: TopLineComponent;
-    let fixture: ComponentFixture<TopLineComponent>;
+describe('VipUserComponent', () => {
+    let component: VipUserComponent;
+    let fixture: ComponentFixture<VipUserComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [],
-            declarations: [ TopLineComponent ]
+            declarations: [ VipUserComponent ]
         })
         .compileComponents();
     }));
@@ -22,5 +22,5 @@ describe('TopLineComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-});
+    })
+})
