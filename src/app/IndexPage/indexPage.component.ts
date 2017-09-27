@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
+
+import { TopLineComponent } from './components/topLine/topLine.component';
 
 import { geoCoordMap } from '../../utils/geoCoordMap';
 import { dateFormat } from '../../utils/dateFormat';
@@ -15,17 +17,17 @@ import { dateFormat } from '../../utils/dateFormat';
 
 export class IndexPageComponent implements OnInit {
     showloading: boolean = true;
-    topLineOption: any;
+    topLineDataUrl: string = "http://127.0.0.1:3000/IndexPageRoute/getTopLineChartsData";
+
+    xAxisData: string[] = [];
+    seriesData: string[] = [];
+
     constructor(public router: Router, private http: Http) {
         setTimeout(() => {
             this.showloading = false;
         }, 3000);
     }
-
-    topLineDataUrl: string = "http://127.0.0.1:3000/IndexPageRoute/getTopLineChartsData";
-    xAxisData: string[] = [];
-    seriesData: string[] = [];
-
+    
     ngOnInit () {
         /**
          * 当Angular组件初始化完成数据绑定的输入属性后，用来初始化指令或者组件。
@@ -39,8 +41,12 @@ export class IndexPageComponent implements OnInit {
         me.http.post(me.topLineDataUrl, body, options).toPromise().then((res) => {
             me.xAxisData = me.dateFormatFun(res.json().xAxis);
             me.seriesData = res.json().amounts;
-            me.setOption();
+            console.log(">>>", me.xAxisData);
         })
+    }
+
+    ngAfterContentInit () {
+        
     }
 
     dateFormatFun(arr){
@@ -50,99 +56,7 @@ export class IndexPageComponent implements OnInit {
         })
         return arrays;
     }
-
-    setOption() {
-        let me = this;
-        me.topLineOption = {
-            tooltip : {
-                trigger: 'axis',
-                // alwaysShowContent: false,
-                axisPointer : {
-                    type : 'shadow',
-                    shadowStyle:{
-                        color:'rgba(0, 160, 233, 0.4)'
-                    }
-                },
-                formatter:function(params){
-                    if(Array.isArray(params)==true){
-                        return "Time:"+params[0].name+"<br>"+"Alarm Number:"+params[0].value
-                    }
-                }
-            },
-            grid: {
-                left: 0,
-                right: 40,
-                bottom: 0,
-                top: 50,
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    type : 'category',
-                    nameTextStyle:{
-                        color:'#666',
-                        fontFamily:'Arial',
-                        fontSize:'0.12rem'
-                    },
-                    axisLine:{show:false},
-                    axisTick:{show:false},
-                    axisLabel:{
-                        show:true,
-                        textStyle:{
-                            color: "#222"
-                        }
-                    },
-                    boundaryGap : false,
-                    data:me.xAxisData
-                }
-            ],
-            yAxis : [
-                {
-
-                    type : 'value',
-                    axisLine:{show:false},
-                    axisTick:{show:false},
-                    splitNumber:3,
-                    splitLine:{
-                        lineStyle:{
-                            type:'dotted'
-                        }
-                    },
-                    axisLabel:{
-                        textStyle:{
-                            color: "#222"
-                        }
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'',
-                    showSymbol:false,
-                    type:'line',
-                    smooth:true,
-                    itemStyle:{
-                        normal:{
-                            borderColor:'#00a0e9'
-                        }
-                    },
-                    lineStyle:{
-                            normal: {
-                            color:'#00a0e9' 
-                        }
-                    },
-                    areaStyle: {
-                        normal: {
-                            color:'rgba(0,160,233,.2)'
-                        }
-                    },
-                    data:me.seriesData
-                }
-            ]
-        }
-    }
     
-
     datamapvalue = [
         {name: '海门', value: [121.15,31.89,9]},
         {name: '鄂尔多斯', value: [109.781327,39.608266,12]},

@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { IndexPageComponent } from './indexPage.component';
 
+import { TopLineComponent } from './components/topLine/topLine.component';
+
 describe('IndexPageComponent', () => {
     let component: IndexPageComponent;
     let fixture: ComponentFixture<IndexPageComponent>;
@@ -12,7 +14,10 @@ describe('IndexPageComponent', () => {
             imports: [
                 RouterTestingModule
             ],
-            declarations: [ IndexPageComponent ]
+            declarations: [
+                IndexPageComponent,
+                TopLineComponent
+            ]
         })
         .compileComponents();
     }));

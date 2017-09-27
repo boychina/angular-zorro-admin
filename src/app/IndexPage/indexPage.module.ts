@@ -6,6 +6,7 @@ import { AngularEchartsModule } from 'ngx-echarts';
 
 import { IndexPageRoutingModule } from './indexPage-routing.module';
 import { IndexPageComponent } from './indexPage.component';
+import { TopLineComponent } from './components/topLine/topLine.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,10 @@ import { IndexPageComponent } from './indexPage.component';
         NgZorroAntdModule,
         AngularEchartsModule
     ],
-    declarations: [IndexPageComponent]
+    declarations: [
+        IndexPageComponent, 
+        TopLineComponent
+    ]
 })
 
 export class IndexPageModule {

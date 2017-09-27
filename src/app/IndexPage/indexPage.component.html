@@ -1,7 +1,7 @@
 <div class="indexpage">
     <div nz-row class="top_container">
         <div nz-col [nzSpan]="24">
-            <div echarts [options] = "topLineOption" [loading] = "showloading" class="echarts_topline_container"></div>
+            <top-line [xAxisData]="xAxisData" [seriesData]="seriesData"></top-line>
         </div>
     </div>
     <div class="middle_bottom">
