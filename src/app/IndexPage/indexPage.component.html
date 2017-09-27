@@ -4,26 +4,34 @@
             <div echarts [options] = "topLineOption" [loading] = "showloading" class="echarts_topline_container"></div>
         </div>
     </div>
-    <div nz-row class="middle_container">
-        <div nz-col [nzSpan]="3">
-            1
+    <div class="middle_bottom">
+        <div nz-row class="middle_container" [nzType]="'flex'" [nzJustify]="'space-between'">
+            <div nz-col [nzSpan]="3">
+                <div class="user_module">
+                    
+                </div>
+            </div>
+            <div nz-col [nzSpan]="9">
+                <div class="group_module">
+                    
+                </div>
+            </div>
+            <div nz-col [nzSpan]="11">
+                <div class="sp_module">
+                    
+                </div>
+            </div>
         </div>
-        <div nz-col [nzSpan]="9" class="group_module">
-            2
-        </div>
-        <div nz-col [nzSpan]="12">
-            3
-        </div>
-    </div>
-    <div nz-row>
-        <div nz-col [nzSpan]="8">
+        <div nz-row>
+            <div nz-col [nzSpan]="8">
+                col-8
+            </div>
+            <div nz-col [nzSpan]="8">
+                <div echarts [options] = "mapOption" [loading]="showloading" class="echarts_map_container"></div>
+            </div>
+            <div nz-col [nzSpan]="8">
             col-8
-        </div>
-        <div nz-col [nzSpan]="8">
-            <div echarts [options] = "mapOption" [loading]="showloading" class="echarts_map_container"></div>
-        </div>
-        <div nz-col [nzSpan]="8">
-        col-8
+            </div>
         </div>
     </div>
 </div>

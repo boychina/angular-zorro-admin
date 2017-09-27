@@ -55,6 +55,4 @@ var dateFormat = function(date, str) {
     return str;
 }
 
-dateFormat(new Date(1396178344662), 'yyyy-mm-dd HH:ii:ss');
-
 export { dateFormat };
