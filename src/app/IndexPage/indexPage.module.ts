@@ -9,6 +9,7 @@ import { IndexPageRoutingModule } from './indexPage-routing.module';
 import { IndexPageComponent } from './indexPage.component';
 import { TopLineComponent } from './components/topLine/topLine.component';
 import { VipUserComponent } from './components/user/vipUser.component';
+import { AlarmNum } from './components/common/alarmNum.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { VipUserComponent } from './components/user/vipUser.component';
     declarations: [
         IndexPageComponent,
         TopLineComponent,
-        VipUserComponent
+        VipUserComponent,
+        AlarmNum
     ]
 })
 

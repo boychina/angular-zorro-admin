@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
-import { AlarmNum } from './alarmNum.component';
-
 @Component({
-    selector: 'vip-user',
-    templateUrl: './vipUser.component.html',
-    styleUrls: ['./vipUser.component.scss']
+    selector: 'alarm-num',
+    template: `
+        <p>Hello World!</p>
+    `,
+    styles: []
 })
 
-export class VipUserComponent implements OnInit {
+export class AlarmNum {
     constructor(private http: Http) {
 
     }
@@ -17,6 +17,4 @@ export class VipUserComponent implements OnInit {
     ngOnInit() {
 
     }
-
-    
 }

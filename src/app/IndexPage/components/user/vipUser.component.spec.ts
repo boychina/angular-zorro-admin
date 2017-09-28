@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VipUserComponent } from './vipUser.component';
+import { AlarmNum } from '../common/alarmNum.component';
 
 describe('VipUserComponent', () => {
     let component: VipUserComponent;
@@ -9,13 +10,13 @@ describe('VipUserComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [],
-            declarations: [ VipUserComponent ]
+            declarations: [ VipUserComponent, AlarmNum ]
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TopLineComponent);
+        fixture = TestBed.createComponent(VipUserComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
