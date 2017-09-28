@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
-import { TopLineComponent } from './components/topLine/topLine.component';
-
 import { geoCoordMap } from '../../utils/geoCoordMap';
 import { dateFormat } from '../../utils/dateFormat';
 

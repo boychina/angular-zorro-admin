@@ -5,8 +5,10 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { AngularEchartsModule } from 'ngx-echarts';
 
 import { IndexPageRoutingModule } from './indexPage-routing.module';
+
 import { IndexPageComponent } from './indexPage.component';
 import { TopLineComponent } from './components/topLine/topLine.component';
+import { VipUserComponent } from './components/user/vipUser.component';
 
 @NgModule({
     imports: [
@@ -16,8 +18,9 @@ import { TopLineComponent } from './components/topLine/topLine.component';
         AngularEchartsModule
     ],
     declarations: [
-        IndexPageComponent, 
-        TopLineComponent
+        IndexPageComponent,
+        TopLineComponent,
+        VipUserComponent
     ]
 })
 
