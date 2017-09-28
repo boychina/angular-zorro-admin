@@ -7,8 +7,6 @@ import { geoCoordMap } from '../../utils/geoCoordMap';
 import { dateFormat } from '../../utils/dateFormat';
 import * as Apis from '../../utils/Apis';
 
-console.log(Apis, ">>>");
-
 @Component({
     selector: 'indexPage',
     templateUrl: './indexpage.component.html',
