@@ -11,16 +11,14 @@ import { AlarmNum } from './alarmNum.component';
 
 export class VipUserComponent implements OnInit {
     newDate: string = '';
+    warningInfoNum: number = 0;
+    criticalInfoNum: number = 0;
     constructor(private http: Http) {
 
     }
 
     ngOnInit() {
-
-    }
-
-    getDate() {
-        this.newDate = new Date().getTime() + '';
+        
     }
     
 }

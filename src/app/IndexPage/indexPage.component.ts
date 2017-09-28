@@ -5,6 +5,9 @@ import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
 import { geoCoordMap } from '../../utils/geoCoordMap';
 import { dateFormat } from '../../utils/dateFormat';
+import * as Apis from '../../utils/Apis';
+
+console.log(Apis, ">>>");
 
 @Component({
     selector: 'indexPage',
@@ -15,7 +18,7 @@ import { dateFormat } from '../../utils/dateFormat';
 
 export class IndexPageComponent implements OnInit {
     showloading: boolean = true;
-    topLineDataUrl: string = "http://127.0.0.1:3000/IndexPageRoute/getTopLineChartsData";
+    topLineDataUrl: string = Apis.indexPageUrl.GET_TOPLINE_DATA;
 
     xAxisData: string[] = [];
     seriesData: string[] = [];
