@@ -10,6 +10,7 @@ import { AlarmNum } from './alarmNum.component';
 })
 
 export class VipUserComponent implements OnInit {
+    newDate: string = '';
     constructor(private http: Http) {
 
     }
@@ -18,5 +19,8 @@ export class VipUserComponent implements OnInit {
 
     }
 
+    getDate() {
+        this.newDate = new Date().getTime() + '';
+    }
     
 }
