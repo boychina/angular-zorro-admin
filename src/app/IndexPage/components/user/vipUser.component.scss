@@ -1,4 +1,5 @@
 .user_container{
+    height: 100%;
     .user_header{
         height: 20px;
         line-height: 20px;
@@ -10,5 +11,37 @@
             float: left;
         }
     }
-
+    .user_content{
+        height: calc(100% - 82px);
+        width: 100%;
+        background: url("../../../../assets/images/indexpage/vipuser.png") no-repeat;
+        background-position: center;
+        position: relative;
+        .warning_info, .critical_info{
+            height: 45px;
+            padding: 10px 0;
+            box-sizing: content-box;
+            p{
+                text-align: center;
+            }
+        }
+        .critical_info{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .warning_info_num, .critical_info_num{
+            font-size: 24px;
+            line-height: 1;
+        }
+        .warning_info_num{
+            color: #ffa233;
+        }
+        .critical_info_num{
+            color: #fb523e;
+        }
+        .warning_info_text, .critical_info_text{
+            font-size: 12px;
+        }
+    }
 }
