@@ -30,10 +30,12 @@ export class VipUserComponent implements OnInit {
         let headers = new Headers({ 'Content-type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         me.http.post(me.createVipUserAlarmDataUrl, body, options).toPromise().then((res) => {
-
+            console.log(res);
         });
         me.http.post(me.vipUserDataUrl, body, options).toPromise().then((res) => {
             console.log(res.json());
+            me.warningInfoNum = res.json().warningAlarm;
+            me.criticalInfoNum = res.json().criticalAlarm;
         });
     }
     

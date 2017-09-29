@@ -41,7 +41,29 @@ exports.createVipUserAlarmData = function(func) {
 //获取VIP用户模块的数据
 exports.getVipUserData = function(func) {
     IndexPageDAO.findVipUserData(function(data){
-        let criticalAlarm = 0, warningAlarm = 0, criticalEventAlarm = 0, warningEventAlarm = 0;
-
+        let criticalAlarm = 0,
+            warningAlarm = 0,
+            criticalEventAlarm = 0,
+            warningEventAlarm = 0,
+            alarmParm = {};
+        data.map((val) => {
+            if (val.alarmType === "critical") {
+                criticalAlarm++;
+            } else if (val.alarmType === 'warning') {
+                warningAlarm++;
+            } else {}
+            if(val.alarmEventType === 'critical') {
+                criticalEventAlarm++;
+            } else if(val.alarmEventType === 'warning') {
+                warningEventAlarm++;
+            }
+        });
+        alarmParm = {
+            "criticalAlarm": criticalAlarm,
+            "warningAlarm": warningAlarm,
+            "criticalEventAlarm": criticalEventAlarm,
+            "warningEventAlarm": warningEventAlarm
+        }
+        func(alarmParm);
     });
 }

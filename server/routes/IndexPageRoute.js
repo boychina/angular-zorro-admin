@@ -12,9 +12,11 @@ router.post('/getTopLineData', function(req, res) {
 //根据当前时间点，往数据库中定时写入数据
 router.post('/createVipUserAlarmData', function(req, res) {
     IndexPageService.createVipUserAlarmData(function(data){
-        res.send("创建告警成功！");
+        // res.send("创建告警成功！"); //这里不能res.send(),否则就会停止循环
+        // res.redirect('back');
     })
 })
+
 
 //获取VIP用户模块的数据
 router.post('/getVipUserData', function(req, res) {
