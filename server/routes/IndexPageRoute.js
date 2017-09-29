@@ -22,8 +22,8 @@ router.post('/getVipUserData', function(req, res) {
     let startTime = (req.startTime && req.startTime !== "") ? req.startTime : new Date().getTime();
     let endTime = startTime + 1000*60*15;
     let parm = {
-        startTime: startTime,
-        endTime: endTime
+        startTime: parseInt(startTime/1000),
+        endTime: parseInt(endTime/1000)
     };
     IndexPageService.getVipUserData(parm, function(data){
         res.send(data);
