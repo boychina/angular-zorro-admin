@@ -46,13 +46,11 @@ import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 })
 
 export class AlarmNum {
-
+    @Input() criticalNum;
+    @Input() warningNum;
     constructor(private http: Http) {
 
     }
-
-    criticalNum: number = 100;
-    warningNum: number = 99;
 
     ngOnInit() {
 

@@ -15,11 +15,12 @@ export class VipUserComponent implements OnInit {
     newDate: string = '';
     warningInfoNum: number = 0;
     criticalInfoNum: number = 0;
+    warningEventNum: number = 0;
+    criticalEventNum: number = 0;
     vipUserDataUrl: string = Apis.indexPageUrl.GET_VIPUSER_DATA;
     createVipUserAlarmDataUrl: string = Apis.indexPageUrl.CREATE_VIPUSER_ALARM_DATA;
-    constructor(private http: Http) {
 
-    }
+    constructor(private http: Http) {}
 
     ngOnInit() {
         /**
@@ -29,13 +30,13 @@ export class VipUserComponent implements OnInit {
         let body = JSON.stringify({});
         let headers = new Headers({ 'Content-type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        me.http.post(me.createVipUserAlarmDataUrl, body, options).toPromise().then((res) => {
-            console.log(res);
-        });
+
         me.http.post(me.vipUserDataUrl, body, options).toPromise().then((res) => {
-            console.log(res.json());
-            me.warningInfoNum = res.json().warningAlarm;
-            me.criticalInfoNum = res.json().criticalAlarm;
+            let data = res.json();
+            me.warningInfoNum = data.warningAlarm;
+            me.criticalInfoNum = data.criticalAlarm;
+            me.warningEventNum = data.warningEventAlarm;
+            me.criticalEventNum = data.criticalEventAlarm;
         });
     }
     
