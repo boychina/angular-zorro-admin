@@ -19,7 +19,13 @@ router.post('/getTopLineData', function(req, res) {
 
 //获取VIP用户模块的数据
 router.post('/getVipUserData', function(req, res) {
-    IndexPageService.getVipUserData(function(data){
+    let startTime = (req.startTime && req.startTime !== "") ? req.startTime : new Date().getTime();
+    let endTime = startTime + 1000*60*15;
+    let parm = {
+        startTime: startTime,
+        endTime: endTime
+    };
+    IndexPageService.getVipUserData(parm, function(data){
         res.send(data);
     })
 })
