@@ -23,7 +23,6 @@ import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
         .alarm_num_container{
             display: inline-block;
             height: 100%;
-            outline: 1px solid red;
             float: right;
         }
         .critical_num{
@@ -60,6 +59,6 @@ export class AlarmNum {
     }
 
     ngOnChanges () {
-        
+
     }
 }
