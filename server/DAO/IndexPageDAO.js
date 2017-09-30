@@ -14,15 +14,12 @@ exports.insetVipUserAlarmData = function(parm) {
 
 //查询VIP用户模块部分数据
 exports.findVipUserData = function(parm, func) {
-    console.log(">>>",parm);
     db.collection("vipUserData").find({
         "alarmTime": {
-            $lte: parm.endTime,
-            $gt: parm.startTime
+            '$lte': parm.endTime,
+            '$gt': parm.startTime
         }
     }, function(data) {
-        console.log("<<",data);
         func(data);
     });
 }
-

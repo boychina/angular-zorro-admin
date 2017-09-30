@@ -19,8 +19,8 @@ router.post('/getTopLineData', function(req, res) {
 
 //获取VIP用户模块的数据
 router.post('/getVipUserData', function(req, res) {
-    let startTime = (req.startTime && req.startTime !== "") ? req.startTime : new Date().getTime();
-    let endTime = startTime + 1000*60*15;
+    let endTime = (req.endTime && req.endTime !== "") ? req.endTime : new Date().getTime();
+    let startTime = endTime - 1000*60*15;
     let parm = {
         startTime: startTime/1000,
         endTime: endTime/1000
