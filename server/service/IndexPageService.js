@@ -65,29 +65,60 @@ var timeout = setTimeout(function(){
 //获取VIP用户模块的数据
 exports.getVipUserData = function(parm, func) {
     IndexPageDAO.findVipUserData(parm, function(data){
-        let criticalAlarm = 0,
-            warningAlarm = 0,
-            criticalEventAlarm = 0,
-            warningEventAlarm = 0,
-            alarmParm = {};
+        let criticalAlarm = [],
+            warningAlarm = [],
+            criticalEventAlarm = [],
+            warningEventAlarm = [],
+            alarmParm = {},
+            criticalAlarmTrend = 0,
+            warningAlarmTrend = 0,
+            criticalEventAlarmTrend = 0,
+            warningEventAlarmTrdnd = 0,
+            prevWarningNum = 0,
+            prevCriticalNum = 0,
+            prevWarningEventNum = 0,
+            prevCriticalEventNum = 0;
         data.map((val) => {
-            if (val.alarmType === "critical") {
-                criticalAlarm++;
-            } else if (val.alarmType === 'warning') {
-                warningAlarm++;
-            } else {}
+            if(val.alarmTime > parm.startTime && val.alarmTime <= parm.endTime){
+                if (val.alarmType === "critical") {
+                    criticalAlarm.push(val.alarmType);
+                } else if (val.alarmType === 'warning') {
+                    warningAlarm.push(val.alarmType);                    
+                } else {}
 
-            if(val.alarmEventType === 'critical') {
-                criticalEventAlarm++;
-            } else if(val.alarmEventType === 'warning') {
-                warningEventAlarm++;
-            } else {}
+                if(val.alarmEventType === 'critical') {
+                    criticalEventAlarm.push(val.alarmEventType);
+                } else if(val.alarmEventType === 'warning') {
+                    warningEventAlarm.push(val.alarmEventType);
+                } else {}
+            } else {
+                if (val.alarmType === "critical") {
+                    prevCriticalNum++;
+                } else if (val.alarmType === 'warning') {
+                    prevWarningNum++;
+                } else {}
+
+                if(val.alarmEventType === 'critical') {
+                    prevCriticalEventNum++;
+                } else if(val.alarmEventType === 'warning') {
+                    prevWarningEventNum++;
+                } else {}
+            }
         });
+        
+        criticalAlarmTrend = criticalAlarm.length !== prevCriticalNum ? (criticalAlarm.length > prevCriticalNum ? 1 : -1) : 0;
+        warningAlarmTrend = warningAlarm.length !== prevWarningNum ? (warningAlarm.length > prevWarningNum ? 1 : -1) : 0;
+        criticalEventAlarmTrend = criticalEventAlarm.length !== prevCriticalEventNum ? (criticalEventAlarm.length > prevCriticalEventNum ? 1 : -1) : 0;
+        warningEventAlarmTrdnd = warningEventAlarm.length !== prevWarningEventNum ? (warningEventAlarm.length > prevWarningEventNum ? 1 : -1) : 0;
         alarmParm = {
-            "criticalAlarm": criticalAlarm,
-            "warningAlarm": warningAlarm,
-            "criticalEventAlarm": criticalEventAlarm,
-            "warningEventAlarm": warningEventAlarm
+            "criticalAlarm": criticalAlarm.length,
+            "warningAlarm": warningAlarm.length,
+            "criticalEventAlarm": criticalEventAlarm.length,
+            "warningEventAlarm": warningEventAlarm.length,
+            "criticalAlarmTrend": criticalAlarmTrend,
+            "warningAlarmTrend": warningAlarmTrend,
+            "criticalEventAlarmTrend": criticalEventAlarmTrend,
+            "warningEventAlarmTrend": warningEventAlarmTrdnd
         }
         func(alarmParm);
     });

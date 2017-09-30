@@ -15,8 +15,11 @@ export class VipUserComponent implements OnInit {
     newDate: string = '';
     warningInfoNum: number = 0;
     criticalInfoNum: number = 0;
-    warningEventNum: number = 0;
-    criticalEventNum: number = 0;
+    warningAlarmTrend: number = 0;
+    criticalAlarmTrend: number = 0;
+
+    alarmNumParm: object = {};
+
     vipUserDataUrl: string = Apis.indexPageUrl.GET_VIPUSER_DATA;
     createVipUserAlarmDataUrl: string = Apis.indexPageUrl.CREATE_VIPUSER_ALARM_DATA;
 
@@ -35,8 +38,15 @@ export class VipUserComponent implements OnInit {
             let data = res.json();
             me.warningInfoNum = data.warningAlarm;
             me.criticalInfoNum = data.criticalAlarm;
-            me.warningEventNum = data.warningEventAlarm;
-            me.criticalEventNum = data.criticalEventAlarm;
+            me.warningAlarmTrend = data.warningAlarmTrend;
+            me.criticalAlarmTrend = data.criticalAlarmTrend;
+
+            me.alarmNumParm = {
+                "warningNum": data.warningEventAlarm,
+                "criticalNum": data.criticalEventAlarm,
+                "warningAlarmTrend": data.warningEventAlarmTrend,
+                "criticalAlarmTrend": data.criticalEventAlarmTrend
+            }
         });
     }
     

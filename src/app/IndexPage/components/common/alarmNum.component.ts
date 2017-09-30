@@ -6,12 +6,16 @@ import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
     template: `
         <div class="alarm_num_container">
             <span class="critical_num">
-                {{criticalNum}}
-                <i class="anticon anticon-arrow-up"></i>
+                {{alarmNumParm.criticalNum}}
+                <i *ngIf="alarmNumParm.warningAlarmTrend > 0" class="anticon anticon-arrow-up"></i>
+                <i *ngIf="alarmNumParm.warningAlarmTrend === 0" class="anticon anticon-minus"></i>
+                <i *ngIf="alarmNumParm.warningAlarmTrend < 0" class="anticon anticon-arrow-down"></i>
             </span>
             <span class="warning_num">
-                {{warningNum}}
-                <i class="anticon anticon-arrow-up"></i>
+                {{alarmNumParm.warningNum}}
+                <i *ngIf="alarmNumParm.criticalAlarmTrend > 0" class="anticon anticon-arrow-up"></i>
+                <i *ngIf="alarmNumParm.criticalAlarmTrend === 0" class="anticon anticon-minus"></i>
+                <i *ngIf="alarmNumParm.criticalAlarmTrend < 0" class="anticon anticon-arrow-down"></i>
             </span>
         </div>
     `,
@@ -46,13 +50,16 @@ import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 })
 
 export class AlarmNum {
-    @Input() criticalNum;
-    @Input() warningNum;
+    @Input() alarmNumParm;
     constructor(private http: Http) {
 
     }
 
     ngOnInit() {
 
+    }
+
+    ngOnChanges () {
+        
     }
 }
