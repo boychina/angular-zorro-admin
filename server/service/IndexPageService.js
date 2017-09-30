@@ -79,7 +79,7 @@ exports.getVipUserData = function(parm, func) {
             prevWarningEventNum = 0,
             prevCriticalEventNum = 0;
         data.map((val) => {
-            if(val.alarmTime > parm.startTime && val.alarmTime <= parm.endTime){
+            if(val.alarmTime > parm.midTime && val.alarmTime <= parm.endTime){
                 if (val.alarmType === "critical") {
                     criticalAlarm.push(val.alarmType);
                 } else if (val.alarmType === 'warning') {
@@ -105,7 +105,7 @@ exports.getVipUserData = function(parm, func) {
                 } else {}
             }
         });
-        
+
         criticalAlarmTrend = criticalAlarm.length !== prevCriticalNum ? (criticalAlarm.length > prevCriticalNum ? 1 : -1) : 0;
         warningAlarmTrend = warningAlarm.length !== prevWarningNum ? (warningAlarm.length > prevWarningNum ? 1 : -1) : 0;
         criticalEventAlarmTrend = criticalEventAlarm.length !== prevCriticalEventNum ? (criticalEventAlarm.length > prevCriticalEventNum ? 1 : -1) : 0;
