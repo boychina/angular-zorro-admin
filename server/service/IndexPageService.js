@@ -16,27 +16,6 @@ exports.getTopLineData = function(func) {
     });
 }
 
-//根据当前时间点，往数据库中定时写入数据
-// var interval = setInterval(() => {
-//     console.log("time", new Date());
-//     let random = parseInt(10*Math.random()); //生成一个0~10之间的随机数
-//     let alarmParm = {};
-//     if(random >= 5){
-//         alarmParm = {
-//             "alarmType": random < 7 ? "critical" : "warning",
-//             "alarmEventType": random >= 7 ? "critical" : "warning",
-//             "alarmTime": parseInt(new Date().getTime()/1000)
-//         }
-//     } else {
-//         alarmParm = {
-//             "alarmType": random < 3 ? "critical" : "warning",
-//             "alarmEventType": random >= 3 ? "critical" : "warning",
-//             "alarmTime": parseInt(new Date().getTime()/1000)
-//         }
-//     }
-//     IndexPageDAO.insetVipUserAlarmData(alarmParm);
-// }, 10000);
-
 //获取VIP用户模块的数据
 exports.getVipUserData = function(parm, func) {
     IndexPageDAO.findVipUserData(parm, function(data){

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
+import * as Apis from '../../../../utils/Apis';
 
+import { dateFormat } from '../../../../utils/dateFormat';
 
 @Component({
     selector: 'top-line',
@@ -10,16 +12,35 @@ import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
 export class TopLineComponent implements OnInit {
     topLineOption: any = {};
+    topLineDataUrl: string = Apis.indexPageUrl.GET_TOPLINE_DATA;
 
-    @Input() xAxisData;
-    @Input() seriesData;
+    xAxisData: string[] = [];
+    seriesData: string[] = [];
 
-    constructor() {
+    constructor(private http: Http) {
         
     }
     
     ngOnInit () {
+        let me = this;
+        let body = JSON.stringify({
+               
+        });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        me.http.post(me.topLineDataUrl, body, options).toPromise().then((res) => {
+            me.xAxisData = me.dateFormatFun(res.json().xAxis);
+            me.seriesData = res.json().amounts;
+            me.setOption(me.xAxisData, me.seriesData);
+        })
+    }
 
+    dateFormatFun(arr){
+        let arrays = [];
+        arr.map((val) => {
+            arrays.push(dateFormat(val*1000, 'hh:ii'));
+        })
+        return arrays;
     }
 
     ngOnChanges () {

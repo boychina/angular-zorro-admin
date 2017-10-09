@@ -4,8 +4,7 @@ import { routerTransition } from '../router.animations';
 import { Http, HttpModule, RequestOptions, Headers } from '@angular/http';
 
 import { geoCoordMap } from '../../utils/geoCoordMap';
-import { dateFormat } from '../../utils/dateFormat';
-import * as Apis from '../../utils/Apis';
+
 
 @Component({
     selector: 'indexPage',
@@ -16,10 +15,6 @@ import * as Apis from '../../utils/Apis';
 
 export class IndexPageComponent implements OnInit {
     showloading: boolean = true;
-    topLineDataUrl: string = Apis.indexPageUrl.GET_TOPLINE_DATA;
-
-    xAxisData: string[] = [];
-    seriesData: string[] = [];
 
     constructor(public router: Router, private http: Http) {
         setTimeout(() => {
@@ -31,24 +26,7 @@ export class IndexPageComponent implements OnInit {
         /**
          * 当Angular组件初始化完成数据绑定的输入属性后，用来初始化指令或者组件。
          */
-        let me = this;
-        let body = JSON.stringify({
-               
-        });
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        me.http.post(me.topLineDataUrl, body, options).toPromise().then((res) => {
-            me.xAxisData = me.dateFormatFun(res.json().xAxis);
-            me.seriesData = res.json().amounts;
-        })
-    }
-
-    dateFormatFun(arr){
-        let arrays = [];
-        arr.map((val) => {
-            arrays.push(dateFormat(val*1000, 'hh:ii'));
-        })
-        return arrays;
+        
     }
     
     datamapvalue = [
