@@ -4,7 +4,8 @@ var IndexPageService = require('../service/IndexPageService');
 
 //获取页面折线图部分数据
 router.post('/getTopLineData', function(req, res) {
-    console.log(">>>>",req);
+    console.log(">>>>",req.body.alarmTime);
+    var alarmTime = req.body.alarmTime;
     IndexPageService.getTopLineData(function(data){
         res.send(data);
     });

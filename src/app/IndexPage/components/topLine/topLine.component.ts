@@ -24,7 +24,7 @@ export class TopLineComponent implements OnInit {
     ngOnInit () {
         let me = this;
         let body = JSON.stringify({
-               
+            "alarmTime": ''
         });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
