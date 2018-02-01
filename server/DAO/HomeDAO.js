@@ -1,4 +1,4 @@
-var db = require('./database');
+var db = require('./databaseByMongo');
 
 // 查找home页菜单数据
 exports.findMenusData = function(func) {

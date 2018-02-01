@@ -1,4 +1,4 @@
-var db = require('./database');
+var db = require('./databaseByMongo');
 
 //查询页面折线图部分数据
 exports.findTopLineData = function(func) {
