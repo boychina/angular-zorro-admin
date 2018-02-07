@@ -1,7 +1,7 @@
 'use strict';
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
-var url = 'mongodb://127.0.0.1:27017/bms';
+var url = 'mongodb://127.0.0.1:27017/ngAdmin';
 
 var arySort = function(ary){
     ary.sort(function(a,b){

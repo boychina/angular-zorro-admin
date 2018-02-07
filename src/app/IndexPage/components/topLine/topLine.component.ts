@@ -138,7 +138,4 @@ export class TopLineComponent implements OnInit {
             ]
         }
     }
-
-
-    
 }
